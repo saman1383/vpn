@@ -2,6 +2,25 @@
 
 Persian RTL, responsive VPN website built with React 19, Vite 6, Lucide icons and locally bundled Vazirmatn fonts.
 
+## Automated server installation
+
+See the complete [Persian installation guide](docs/INSTALL.fa.md). From a checkout on a Linux server:
+
+```sh
+bash install.sh --dry-run
+sudo bash install.sh --yes
+# Optional automatic HTTPS (replace the example values; configure DNS first):
+sudo bash install.sh --yes --domain vpn.example.com --email owner@example.com
+```
+
+The installer bootstraps Docker/Compose on Ubuntu/Debian when needed, builds the front-end with Node 22 in a multi-stage Docker image, runs a non-root/read-only Nginx container on port 8080, and optionally runs Caddy on ports 80/443. HTTPS mode binds direct HTTP to loopback. It validates inputs, protects against taking over an unrelated Compose project, builds before replacing the current web container, and verifies an internal HTTP health endpoint. It does **not** verify public TLS issuance or modify DNS/host firewall/existing web servers. Docker itself may configure its normal host networking. Use the same name/domain/port options when redeploying. No automatic rollback or zero-downtime guarantee is provided.
+
+**This installs the demo UI only, not a VPN server, authentication, database or payment backend.** Admin remains public. Do not use sensitive data. Full Docker deployment/certificate issuance requires validation on your own target host and domain.
+
+## Visual direction
+
+The website uses a redesigned midnight/forest and electric-lime identity: a custom SVG network illustration, dark editorial landing page, high-contrast calls to action, revised subscription cards, dark dashboard sidebars, mineral-white workspaces, coordinated metrics/charts and responsive layouts. Assets and fonts are local; no external image/font services are required.
+
 ## Run
 
 ```sh
@@ -51,7 +70,7 @@ A production implementation requires a backend with authentication/RBAC, persist
 
 ## Tests
 
-`npm test` runs Node tests covering sample data integrity, relational delete protection, payment totals, ID allocation and storage restoration/fallback.
+`npm test` runs Node tests covering sample data integrity, relational delete protection, payment totals, ID allocation, storage restoration/fallback, installer syntax, dry-run behavior and rejection of malformed/unsafe inputs.
 
 For browser smoke tests, start `npm run dev` in another terminal, then:
 
@@ -62,4 +81,4 @@ npm run test:e2e
 
 Optional environment variables: `TEST_URL` (defaults to `http://localhost:5173`) and `CHROMIUM_PATH` (custom Chromium executable).
 
-The browser suite covers user create/edit/delete and persistence, relational guards, ticket replies/closure, simulated refunds/CSV download, service creation/renewal, plan/server creation/deletion, settings/activity log, mobile navigation/overflow, and public/user/admin routing. Tests use a fresh isolated browser context and do not change your own browser data.
+The browser suite covers user create/edit/delete and persistence, relational guards, ticket replies/closure, simulated refunds/CSV download, service creation/renewal, plan/server creation/deletion, settings/activity log, mobile navigation/overflow, public/user/admin routing, quarterly checkout handoff, device tabs, FAQ toggles and home-page mobile navigation. Tests use a fresh isolated browser context and do not change your own browser data.

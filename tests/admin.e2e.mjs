@@ -109,5 +109,21 @@ try {
   await page.getByRole('button', { name: 'ورود به پنل مدیریت', exact: true }).last().click();
   await page.getByRole('heading', { name: 'همه چیز، در یک نگاه' }).waitFor();
   console.log('Home / user panel / admin routing: OK');
+  await page.goto(`${process.env.TEST_URL || 'http://localhost:5173'}/#home`);
+  await page.getByRole('button', { name: /سه‌ماهه/ }).click();
+  await page.getByRole('link', { name: 'انتخاب حرفه‌ای', exact: true }).click();
+  await page.getByRole('heading', { name: 'تأیید خرید اشتراک حرفه‌ای', exact: true }).waitFor();
+  assert.match(await page.locator('.modal').innerText(), /۵۵۸٬۴۵۰/);
+  await page.goto(`${process.env.TEST_URL || 'http://localhost:5173'}/#home`);
+  await page.getByRole('button', { name: 'ویندوز', exact: true }).click();
+  await page.getByRole('heading', { name: 'ویرا روی ویندوز', exact: true }).waitFor();
+  await page.getByRole('button', { name: 'روی چه دستگاه‌هایی می‌توانم متصل شوم؟', exact: true }).click();
+  assert.equal(await page.getByRole('button', { name: 'روی چه دستگاه‌هایی می‌توانم متصل شوم؟', exact: true }).getAttribute('aria-expanded'), 'true');
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false, 'Home mobile layout stays inside viewport');
+  await page.getByRole('button', { name: 'باز کردن منو', exact: true }).click();
+  await page.getByRole('button', { name: 'تعرفه‌ها', exact: true }).click();
+  assert.equal(await page.getByRole('button', { name: 'باز کردن منو', exact: true }).getAttribute('aria-expanded'), 'false');
+  console.log('Redesigned home: quarterly checkout / device tabs / FAQ / mobile navigation: OK');
   assert.deepEqual(errors, [], 'No browser runtime errors');
 } finally { await browser.close(); }
