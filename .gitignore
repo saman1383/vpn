@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.*
+.cache/
+playwright-report/
+test-results/
+
+.deploy/
+
+/vira-cpanel.zip

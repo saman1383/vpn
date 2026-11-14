@@ -1,0 +1,11 @@
+.git
+node_modules
+dist
+.cache
+.deploy
+.env
+.env.*
+playwright-report
+test-results
+tests
+README.md
