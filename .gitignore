@@ -9,3 +9,6 @@ test-results/
 .deploy/
 
 /vira-cpanel.zip
+
+/vira-cpanel-connected.zip
+backend/config.php

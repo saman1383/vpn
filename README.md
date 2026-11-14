@@ -2,6 +2,20 @@
 
 Persian RTL, responsive VPN website built with React 19, Vite 6, Lucide icons and locally bundled Vazirmatn fonts.
 
+## cPanel: PHP + MySQL connected build
+
+A separate connected React application now uses a PHP API for authentication, server-priced orders, Zarinpal verification, 3x-ui v3.11.0 client creation/renewal, usage, tickets and a scoped admin workspace. It never falls back to the public demo when the backend fails. Secrets live outside the document root.
+
+```sh
+npm ci
+npm run package:cpanel
+# Result: vira-cpanel-connected.zip
+# PHP 8.2+ tests (no live upstreams; SQLite test harness):
+php tests/backend.php
+```
+
+Follow [the cPanel installation and acceptance checklist](docs/CPANEL.fa.md). Configure MySQL, gateway/panel credentials and plans on the host before use. **Live gateway, MySQL and 3x-ui integration are not verified in this environment.** The connected workspace intentionally omits simulated wallet, advanced reports and other demo-only controls. Existing `npm run dev`, `npm run build` and Docker installer remain demo-only; `VITE_APP_MODE=connected` selects the real API application.
+
 ## Automated server installation
 
 See the complete [Persian installation guide](docs/INSTALL.fa.md). From a checkout on a Linux server:

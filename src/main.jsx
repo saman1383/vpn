@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Landing from "./Landing";
+import Connected from "./Connected";
 import Admin from "./Admin";
 import UserOverview from "./UserOverview";
 import { createRoot } from "react-dom/client";
@@ -963,6 +964,7 @@ function Transactions() {
   );
 }
 function Site() {
+  if (import.meta.env.VITE_APP_MODE === "connected") return <Connected />;
   const [route, setRoute] = useState(window.location.hash);
   useEffect(() => {
     const change = () => {
