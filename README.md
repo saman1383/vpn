@@ -19,7 +19,7 @@ The installer bootstraps Docker/Compose on Ubuntu/Debian when needed, builds the
 
 ## Visual direction
 
-The website uses a redesigned midnight/forest and electric-lime identity: a custom SVG network illustration, dark editorial landing page, high-contrast calls to action, revised subscription cards, dark dashboard sidebars, mineral-white workspaces, coordinated metrics/charts and responsive layouts. Assets and fonts are local; no external image/font services are required.
+The website uses the selected **Clear Blue** identity: white surfaces, blue accents, neutral typography, a centered product-led home page, an interactive dashboard preview, bento features, revised pricing cards, device instructions and responsive layouts. Both workspaces use light navigation. The user overview combines subscription cards, wallet and usage summaries; the administrator overview uses a revenue line chart, operation shortcuts, infrastructure status and support activity. Assets and fonts are local; no external image/font services are required.
 
 ## Run
 
@@ -37,7 +37,7 @@ npm test
 
 ## Pages
 
-- `#home` (also the default route): public home page, SVG globe illustration, features, example server locations, pricing, device setup instructions and FAQ accordion.
+- `#home` (also the default route): public home page, interactive dashboard preview, features, example server locations, pricing, device setup instructions and FAQ accordion.
 - `#panel`: user dashboard with service usage, wallet, plans, simulated checkout, support tickets, referrals and account settings.
 - `#panel/buy?plan=1&period=3`: simulated checkout for the quarterly professional plan. The public pricing cards carry their plan and period into the panel.
 - `#panel/guide`: user setup guide.
@@ -46,7 +46,7 @@ npm test
 
 ## Administrator demo
 
-- Overview metrics derived from sample records, a revenue bar chart, infrastructure summary, and recent services/tickets.
+- Overview metrics derived from sample records, a revenue line chart, infrastructure summary, and recent services/tickets.
 - Searchable/filterable user list; create, edit, activate/deactivate and delete unreferenced sample users. Duplicate email validation.
 - Create/edit subscriptions, change their local status and simulate renewal (resets usage, volume and validity from the associated plan after confirmation).
 - Create/edit/delete sample plans and server configurations. Referenced users, plans and servers cannot be deleted.
@@ -81,4 +81,4 @@ npm run test:e2e
 
 Optional environment variables: `TEST_URL` (defaults to `http://localhost:5173`) and `CHROMIUM_PATH` (custom Chromium executable).
 
-The browser suite covers user create/edit/delete and persistence, relational guards, ticket replies/closure, simulated refunds/CSV download, service creation/renewal, plan/server creation/deletion, settings/activity log, mobile navigation/overflow, public/user/admin routing, quarterly checkout handoff, device tabs, FAQ toggles and home-page mobile navigation. Tests use a fresh isolated browser context and do not change your own browser data.
+The browser suite covers user create/edit/delete and persistence, relational guards, ticket replies/closure, simulated refunds/CSV download, service creation/renewal, plan/server creation/deletion, settings/activity log, mobile navigation/overflow, public/user/admin routing, quarterly checkout handoff, device tabs, FAQ toggles and home-page mobile navigation. It also exercises the new preview location selector and the user overview service details, wallet top-up, guide and purchase flow, checking that wallet and usage totals update. Tests use a fresh isolated browser context and do not change your own browser data.
