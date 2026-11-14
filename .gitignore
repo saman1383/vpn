@@ -7,3 +7,5 @@ playwright-report/
 test-results/
 
 .deploy/
+
+/vira-cpanel.zip
